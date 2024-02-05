@@ -1,1 +1,17 @@
-<p>generate works!</p>
+<nav class="navbar navbar-primary bg-primary shadow">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand text-white">
+      <h1>App de turnos</h1>
+    </a>
+  </div>
+</nav>
+
+<div class="row justify-content-center">
+  <div routerLink="/screen" class="col-12 text-center mt-5 p-5">
+    <h1><b>Bienvenid@s</b></h1>
+    <h3>Para generar un turno favor hacer click en el boton 'generar'</h3>
+  </div>
+  <div routerLink="/generate" (click)="save()" class="col-3 text-center mt-5 p-5 rounded bg-success text-white shadow">
+    <h1>Generar</h1>
+  </div>
+</div>
