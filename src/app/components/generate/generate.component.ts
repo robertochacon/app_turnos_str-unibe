@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 })
 export class GenerateComponent implements OnInit {
 
+  no_turn:any;
   constructor(private _turns: TurnsService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,9 @@ export class GenerateComponent implements OnInit {
     // datos.append("service",this.serviceName);
     datos.append("code","");
     this._turns.setTurns(datos).subscribe((response)=>{
+
+      this.no_turn = response.data.id;
+      // this.print();
 
       Swal.fire({
         position: 'center',
@@ -55,6 +59,23 @@ export class GenerateComponent implements OnInit {
 
     })
 
+  }
+
+  print():void{
+    window.focus();
+    setTimeout(() => {
+      window.print();
+    }, 1000);
+  }
+
+  BtPrint(){
+    var prn:any = document.getElementById('print');
+    prn = prn.innerHTML;
+    // prn = prn.innerText;
+    var S = "#Intent;scheme=rawbt;";
+    var P =  "package=ru.a402d.rawbtprinter;end;";
+    var textEncoded = encodeURI(prn);
+    window.location.href="intent:"+textEncoded+S+P;
   }
 
 }
