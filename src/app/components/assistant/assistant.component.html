@@ -26,11 +26,14 @@
                     </div>
                 </div>
                 <div class="row">
-                  <div class="col-6 text-center">
-                      <button class="btn btn-success btn-block">Llamar</button>
+                  <div class="col-4 text-center">
+                    <button (click)="toWaitTurn(turn.id)" class="btn btn-primary btn-block">Poner en espera</button>
                   </div>
-                  <div class="col-6 text-center">
-                    <button class="btn btn-danger btn-block">Eliminar</button>
+                  <div class="col-4 text-center">
+                      <button (click)="callTurn(turn.id)" class="btn btn-success btn-block">Llamar</button>
+                  </div>
+                  <div class="col-4 text-center">
+                    <button (click)="deleteTurn(turn.id)" class="btn btn-danger btn-block">Eliminar</button>
                   </div>
               </div>
             </div>

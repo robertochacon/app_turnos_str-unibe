@@ -50,7 +50,7 @@ export class ScreenComponent implements OnInit {
     }
 
     const echo = new Echo(config);
-    echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
+    echo.channel('channel-turns').listen('EventTurn', (resp:any) => {
 
       this.getAllTurns();
       console.log(resp.msg);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TurnsService } from 'src/app/services/turns.service';
 import Echo from 'laravel-echo';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-assistant',
@@ -23,7 +24,7 @@ export class AssistantComponent implements OnInit {
     this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
-      this.listTurns = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
+      this.listTurns = this.listTurns.filter((item: { status: string; }) => item.status == 'wait' || item.status == 'call' );
 
       setTimeout(function(){
         console.log(response.data);
@@ -66,5 +67,64 @@ export class AssistantComponent implements OnInit {
     });
 
   }
+
+  callTurn(id: any){
+    let datos = new FormData();
+    datos.append("status","call");
+    this._turns.updateTurns(id, datos).subscribe((response)=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Llamando turno',
+        showConfirmButton: false,
+        timer: 1000
+      });
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+  }
+
+  toWaitTurn(id: any){
+    let datos = new FormData();
+    datos.append("status","wait");
+    this._turns.updateTurns(id, datos).subscribe((response)=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'Puesto en espera',
+        showConfirmButton: false,
+        timer: 1000
+      });
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+  }
+
+  deleteTurn(id: any): void {
+    this._turns.deleteTurns(id).subscribe((response)=>{
+      this.getAllTurns();
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Turno eliminado.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    },error => {})
+}
 
 }
