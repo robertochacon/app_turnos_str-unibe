@@ -51,7 +51,7 @@ export class AssistantComponent implements OnInit {
     }
 
     const echo = new Echo(config);
-    echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
+    echo.channel('channel-turns').listen('EventTurn', (resp:any) => {
 
       this.getAllTurns();
       console.log(resp.msg);
@@ -125,6 +125,14 @@ export class AssistantComponent implements OnInit {
         timer: 2000
       });
     },error => {})
-}
+  }
+
+  colorStatus(status:any){
+    if(status=='call'){
+      return 'primary';
+    }else{
+      return 'warning';
+    }
+  }
 
 }

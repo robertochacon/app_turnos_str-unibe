@@ -55,15 +55,27 @@ export class ScreenComponent implements OnInit {
       this.getAllTurns();
       console.log(resp.msg);
 
-    // if(this.notification == 'voice'){
-    //   if(resp.msg.action === 'call_turn'){
-    //     this.voiceTurn('0'+resp.msg.turn);
-    //   }else if(resp.msg.action === 'call_patient'){
-    //     this.voicePatient(resp.msg.patient);
-    //   }
-    // }
+      if(resp.msg.action === 'call'){
+        this.voiceTurn(resp.msg.turn);
+      }
 
     });
+
+  }
+
+  voiceTurn(msg:any){
+
+    let synth = window.speechSynthesis
+    let text = "Turno "+msg;
+    let utterThis = new SpeechSynthesisUtterance(text)
+    utterThis.lang = 'es-ES';
+    synth.speak(utterThis)
+
+    setTimeout(()=>{
+      let utterThis = new SpeechSynthesisUtterance('Requiere atencion');
+      utterThis.lang = 'es-ES';
+      synth.speak(utterThis);
+    },1000);
 
   }
 

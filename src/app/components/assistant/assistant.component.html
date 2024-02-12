@@ -1,7 +1,7 @@
 <nav class="navbar navbar-primary bg-primary shadow">
   <div class="container-fluid">
     <a routerLink="/" class="navbar-brand text-white">
-      <h1>App de turnos</h1>
+      <h1>App de turnos - asistencia</h1>
     </a>
   </div>
 </nav>
@@ -13,13 +13,13 @@
         <h1 class="text-dark text-center mb-2">Lista de turnos</h1>
 
         <div *ngFor="let turn of listTurns;let i = index">
-            <div [class]="'alert shadow bg-warning'" role="alert">
+            <div [ngClass]="'alert shadow bg-'+colorStatus(turn.status)" role="alert">
                 <div class="row">
                     <div class="col-4 text-center">
-                        <h4 class="text-white"><b>Turno:</b><br>TN-0{{ turn.id }}</h4>
+                        <h4 class="text-white"><b>Turno:</b><br>TN-{{ turn.code }}</h4>
                     </div>
                     <div class="col-4 text-center">
-                        <h4 class="text-white"><b>Puesto:</b><br>Ventanilla {{ turn.window }}</h4>
+                        <h4 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h4>
                     </div>
                     <div class="col-4 text-center">
                         <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                   <div class="col-4 text-center">
-                    <button (click)="toWaitTurn(turn.id)" class="btn btn-primary btn-block">Poner en espera</button>
+                    <button (click)="toWaitTurn(turn.id)" class="btn btn-dark btn-block">En espera</button>
                   </div>
                   <div class="col-4 text-center">
                       <button (click)="callTurn(turn.id)" class="btn btn-success btn-block">Llamar</button>

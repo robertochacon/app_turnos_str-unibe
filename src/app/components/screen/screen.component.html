@@ -1,7 +1,7 @@
 <nav class="navbar navbar-primary bg-primary shadow">
   <div class="container-fluid">
     <a routerLink="/" class="navbar-brand text-white">
-      <h1>App de turnos</h1>
+      <h1>App de turnos - pantalla de clientes</h1>
     </a>
   </div>
 </nav>
@@ -16,10 +16,10 @@
             <div [class]="'alert shadow bg-primary'" role="alert">
                 <div class="row">
                     <div class="col-4 text-center">
-                        <h4 class="text-white"><b>Turno:</b><br>TN-0{{ turn.id }}</h4>
+                        <h4 class="text-white"><b>Turno:</b><br>TN-{{ turn.code }}</h4>
                     </div>
                     <div class="col-4 text-center">
-                        <h4 class="text-white" *ngIf="turn.window=='1'"><b>Puesto:</b><br>Ventanilla {{ turn.window }}</h4>
+                        <h4 class="text-white" *ngIf="turn.window=='1'"><b>Puesto:</b><br>{{ turn.window }}</h4>
                     </div>
                     <div class="col-4 text-center">
                         <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>

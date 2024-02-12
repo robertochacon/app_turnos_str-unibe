@@ -23,7 +23,7 @@ export class GenerateComponent implements OnInit {
     this._turns.setTurns(datos).subscribe((response)=>{
 
       this.no_turn = response.data.id;
-      // this.print();
+      this.print();
 
       Swal.fire({
         position: 'center',
