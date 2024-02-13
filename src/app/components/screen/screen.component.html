@@ -8,7 +8,7 @@
 
 <div class="row justify-content-center">
 
-  <div class="col-lg-5 col-md-5 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="container p-3 rounded text-center">
         <h1 class="text-dark text-center mb-2">Lista de turnos</h1>
 
@@ -19,7 +19,7 @@
                         <h4 class="text-white"><b>Turno:</b><br>TN-{{ turn.code }}</h4>
                     </div>
                     <div class="col-4 text-center">
-                        <h4 class="text-white" *ngIf="turn.window=='1'"><b>Puesto:</b><br>{{ turn.window }}</h4>
+                        <h4 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h4>
                     </div>
                     <div class="col-4 text-center">
                         <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>

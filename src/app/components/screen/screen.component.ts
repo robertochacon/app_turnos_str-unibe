@@ -55,9 +55,9 @@ export class ScreenComponent implements OnInit {
       this.getAllTurns();
       console.log(resp.msg);
 
-      if(resp.msg.action === 'call'){
-        this.voiceTurn(resp.msg.turn);
-      }
+      // if(resp.msg.action === 'call'){
+      //   this.voiceTurn(resp.msg.turn);
+      // }
 
     });
 

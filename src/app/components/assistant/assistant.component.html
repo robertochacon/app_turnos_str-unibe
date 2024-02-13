@@ -1,12 +1,25 @@
 <nav class="navbar navbar-primary bg-primary shadow">
   <div class="container-fluid">
     <a routerLink="/" class="navbar-brand text-white">
-      <h1>App de turnos - asistencia</h1>
+      <h1>App de turnos - asistencia <span *ngIf="validateWindow()!=null">({{ validateWindow() }})</span></h1>
     </a>
+    <button *ngIf="validateWindow()!=null" (click)="end()" class="btn btn-danger btn-lg">Salir</button>
   </div>
 </nav>
 
-<div class="row justify-content-center">
+<div *ngIf="action=='start'" class="row justify-content-center">
+  <div class="col-12 text-center mt-3">
+    <h2>Ingrese el numero de puesto</h2>
+  </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="container p-3 rounded text-center">
+      <input type="number" [(ngModel)]="window" class="form-control p-3" placeholder="Ejemplo: 2" style="font-size: 40px;">
+      <button [disabled]="window==''" (click)="start()" class="btn btn-success btn-lg mt-3">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="action=='listTurns'" class="row justify-content-center">
 
   <div class="col-lg-7 col-md-7 col-sm-12">
     <div class="container p-3 rounded text-center">

@@ -23,7 +23,7 @@ export class GenerateComponent implements OnInit {
     this._turns.setTurns(datos).subscribe((response)=>{
 
       this.no_turn = response.data.id;
-      this.print();
+      // this.print();
 
       Swal.fire({
         position: 'center',
@@ -38,7 +38,7 @@ export class GenerateComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Su numero de turno es: TN-'+response.data.id,
+          title: 'Su numero de turno es: TN-'+response.data.code,
           text: 'Favor tomar su ticket',
           showConfirmButton: false,
           timer: 5000

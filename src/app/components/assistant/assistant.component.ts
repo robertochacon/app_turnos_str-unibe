@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TurnsService } from 'src/app/services/turns.service';
 import Echo from 'laravel-echo';
 import Swal from 'sweetalert2'
+import { log } from 'console';
 
 @Component({
   selector: 'app-assistant',
@@ -10,13 +11,33 @@ import Swal from 'sweetalert2'
 })
 export class AssistantComponent implements OnInit {
 
+  action: any = 'start';
+  window: any = '';
   listTurns: any[] = [];
 
   constructor(private _turns: TurnsService) { }
 
   ngOnInit(): void {
+    if (this.validateWindow() != null) {
+      this.action = 'listTurns';
+    }
     this.getAllTurns();
     this.websockets();
+  }
+
+  start(){
+    localStorage.setItem('window', this.window);
+    this.action = 'listTurns';
+  }
+
+  validateWindow(){
+    return localStorage.getItem('window');
+  }
+
+  end(){
+    localStorage.clear();
+    this.action = 'start';
+    this.window = '';
   }
 
   getAllTurns(){
@@ -56,14 +77,6 @@ export class AssistantComponent implements OnInit {
       this.getAllTurns();
       console.log(resp.msg);
 
-    // if(this.notification == 'voice'){
-    //   if(resp.msg.action === 'call_turn'){
-    //     this.voiceTurn('0'+resp.msg.turn);
-    //   }else if(resp.msg.action === 'call_patient'){
-    //     this.voicePatient(resp.msg.patient);
-    //   }
-    // }
-
     });
 
   }
@@ -71,6 +84,7 @@ export class AssistantComponent implements OnInit {
   callTurn(id: any){
     let datos = new FormData();
     datos.append("status","call");
+    datos.append("window",this.validateWindow() || '');
     this._turns.updateTurns(id, datos).subscribe((response)=>{
       Swal.fire({
         position: 'center',

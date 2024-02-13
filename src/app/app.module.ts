@@ -8,7 +8,7 @@ import { GenerateComponent } from './components/generate/generate.component';
 import { ScreenComponent } from './components/screen/screen.component';
 import { AssistantComponent } from './components/assistant/assistant.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
