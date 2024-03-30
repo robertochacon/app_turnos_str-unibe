@@ -65,7 +65,8 @@ export class AssistantComponent implements OnInit {
       broadcaster: 'pusher',
       cluster: 'mt1',
       key: 'RCA090698',
-      wsHost: window.location.hostname,
+      wsHost: '149.50.129.59', //producction
+      // wsHost: window.location.hostname,
       forceTLS: false,
       wsPort: 6001,
       enabledTransports: ['ws']

@@ -10,7 +10,8 @@ export class HelperService {
 
   constructor() {
     if(this.enviroment == 'dev'){
-      this.url = 'http://127.0.0.1:8000';
+      this.url = 'http://149.50.129.59'; //production
+      // this.url = 'http://127.0.0.1:8000';
     }
   }
 
