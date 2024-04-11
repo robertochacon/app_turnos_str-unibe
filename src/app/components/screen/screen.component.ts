@@ -18,9 +18,9 @@ export class ScreenComponent implements OnInit {
     this.websockets();
   }
 
-  getAllTurns(){
+  async getAllTurns(){
 
-    this._turns.getAllTurns().subscribe((response)=>{
+    await this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
       this.listTurns = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
@@ -43,8 +43,8 @@ export class ScreenComponent implements OnInit {
       broadcaster: 'pusher',
       cluster: 'mt1',
       key: 'RCA090698',
-      wsHost: '149.50.129.59', //producction
-      // wsHost: window.location.hostname,
+      // wsHost: '149.50.129.59', //producction
+      wsHost: window.location.hostname,
       forceTLS: false,
       wsPort: 6001,
       enabledTransports: ['ws']

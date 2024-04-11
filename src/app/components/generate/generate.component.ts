@@ -15,12 +15,12 @@ export class GenerateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save(): void {
+  async save() {
 
     let datos = new FormData();
     // datos.append("service",this.serviceName);
     datos.append("code","");
-    this._turns.setTurns(datos).subscribe((response)=>{
+    await this._turns.setTurns(datos).subscribe((response)=>{
 
       this.no_turn = response.data.id;
       // this.print();

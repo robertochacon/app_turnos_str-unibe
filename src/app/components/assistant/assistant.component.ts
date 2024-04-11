@@ -40,9 +40,9 @@ export class AssistantComponent implements OnInit {
     this.window = '';
   }
 
-  getAllTurns(){
+  async getAllTurns(){
 
-    this._turns.getAllTurns().subscribe((response)=>{
+    await this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
       this.listTurns = this.listTurns.filter((item: { status: string; }) => item.status == 'wait' || item.status == 'call' );
@@ -65,8 +65,8 @@ export class AssistantComponent implements OnInit {
       broadcaster: 'pusher',
       cluster: 'mt1',
       key: 'RCA090698',
-      wsHost: '149.50.129.59', //producction
-      // wsHost: window.location.hostname,
+      // wsHost: '149.50.129.59', //producction
+      wsHost: window.location.hostname,
       forceTLS: false,
       wsPort: 6001,
       enabledTransports: ['ws']
@@ -82,11 +82,11 @@ export class AssistantComponent implements OnInit {
 
   }
 
-  callTurn(id: any){
+  async callTurn(id: any){
     let datos = new FormData();
     datos.append("status","call");
     datos.append("window",this.validateWindow() || '');
-    this._turns.updateTurns(id, datos).subscribe((response)=>{
+    await this._turns.updateTurns(id, datos).subscribe((response)=>{
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -106,10 +106,10 @@ export class AssistantComponent implements OnInit {
     })
   }
 
-  toWaitTurn(id: any){
+  async toWaitTurn(id: any){
     let datos = new FormData();
     datos.append("status","wait");
-    this._turns.updateTurns(id, datos).subscribe((response)=>{
+    await this._turns.updateTurns(id, datos).subscribe((response)=>{
       Swal.fire({
         position: 'center',
         icon: 'info',
@@ -129,8 +129,8 @@ export class AssistantComponent implements OnInit {
     })
   }
 
-  deleteTurn(id: any): void {
-    this._turns.deleteTurns(id).subscribe((response)=>{
+  async deleteTurn(id: any){
+    await this._turns.deleteTurns(id).subscribe((response)=>{
       this.getAllTurns();
       Swal.fire({
         position: 'center',
